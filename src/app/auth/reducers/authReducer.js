@@ -1,5 +1,9 @@
 //rxreducer
-import { REGISTER_SUCCESS, USER_LOADED } from "../../../redux/types/userTypes";
+import {
+  REGISTER_SUCCESS,
+  USER_LOADED,
+  LOGIN_SUCCESS,
+} from "../../../redux/types/userTypes";
 const initialState = {
   user: null,
   isAuthenticated: false,
@@ -19,6 +23,8 @@ export default (state = initialState, action) => {
         user: payload,
       };
     case REGISTER_SUCCESS:
+      return { ...state, ...payload, isAuthenticated: true, loading: false };
+    case LOGIN_SUCCESS:
       return { ...state, ...payload, isAuthenticated: true, loading: false };
     //once the registration is done our registration API is going to return a token , if we get the token as a payload then authentication is true , we just received the newly created token
     //we use the loading flag to stop the loading of the image

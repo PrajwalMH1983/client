@@ -8,6 +8,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Login } from "../components/Login";
 import { Register } from "../components/Register";
+import Login3 from "../components/Login3";
 //we are utilizing Register3 without brackets eventhough its a function because its export is at the end not at the beginning.
 import Register3 from "../components/Register3";
 
@@ -18,7 +19,7 @@ export const AuthRouters = () => {
     <div>
       <Routes>
         <Route path="/register" element={<Register3></Register3>}></Route>
-        <Route path="/login" element={<Login></Login>}></Route>
+        <Route path="/login" element={<Login3></Login3>}></Route>
       </Routes>
     </div>
   );

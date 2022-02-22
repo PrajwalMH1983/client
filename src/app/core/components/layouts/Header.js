@@ -6,9 +6,9 @@ export default class Header extends Component {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
-          <a className="navbar-brand" href="http://localhost:3000">
+          <Link className="navbar-brand" to="/">
             DevConnector
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"

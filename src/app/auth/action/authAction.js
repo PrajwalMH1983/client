@@ -1,6 +1,10 @@
 //Register user
 import axios from "axios";
-import { REGISTER_SUCCESS, USER_LOADED } from "../../../redux/types/userTypes";
+import {
+  REGISTER_SUCCESS,
+  USER_LOADED,
+  LOGIN_SUCCESS,
+} from "../../../redux/types/userTypes";
 import api from "../../../utils/api";
 //our actions are asynchronous in nature
 //when requests are coming in random manner there is no order.
@@ -26,5 +30,12 @@ export const loadUser = () => async (dispatch) => {
   try {
     const res = await api.get("/auth");
     dispatch({ type: USER_LOADED, payload: res.data });
+  } catch (err) {}
+};
+
+export const login = (formData) => async (dispatch) => {
+  try {
+    const res = await api.post("/auth", formData);
+    dispatch({ type: LOGIN_SUCCESS, payload: res.data });
   } catch (err) {}
 };

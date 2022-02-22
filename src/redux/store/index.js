@@ -36,11 +36,11 @@ store.subscribe(() => {
   //recent one
   currentState = store.getState();
 
-  console.log("inside the subscriber middleware");
+  //console.log("inside the subscriber middleware");
   //We can compare the data from 2 states
   if (previousState.auth.token !== currentState.auth.token) {
     const token = currentState.auth.token;
-    console.log("Inside subscribe");
+    //console.log("Inside subscribe");
     setAuthToken(token);
   }
   //based on that we can take a call to update the token
