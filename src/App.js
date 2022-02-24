@@ -14,6 +14,7 @@ import DashboardRouter from "./app/dashboard/routings/DashboardRouter";
 import { useEffect } from "react";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./app/auth/action/authAction";
+import Alert from "./app/core/components/Alert";
 
 //integation of react and redux.
 //Routing scope should be applied to the entire application
@@ -28,10 +29,14 @@ function App() {
   //   store.dispatch(loadUser());
   // }, []);
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.token) {
       setAuthToken(localStorage.getItem("token"));
       store.dispatch(loadUser());
     }
+    // if (localStorage.token) {
+    //   setAuthToken(localStorage.token);
+    //   store.dispatch(loadUser());
+    // }
   }, []);
 
   return (
@@ -40,6 +45,7 @@ function App() {
       <Provider store={store}>
         <Router>
           <Header></Header>
+          <Alert />
           <Routes>
             <Route path="/" element={<Landing></Landing>}></Route>
             <Route path="/auth/*" element={<AuthRouters></AuthRouters>}></Route>

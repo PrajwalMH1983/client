@@ -4,8 +4,10 @@ import {
   REGISTER_SUCCESS,
   USER_LOADED,
   LOGIN_SUCCESS,
+  REGISTER_FAIL,
 } from "../../../redux/types/userTypes";
 import api from "../../../utils/api";
+import { setAlert } from "../../core/actions/alertAction";
 //our actions are asynchronous in nature
 //when requests are coming in random manner there is no order.
 //dispatch will connect u to the thunk internally
@@ -21,6 +23,12 @@ export const register = (formData) => async (dispatch) => {
     dispatch({ type: REGISTER_SUCCESS, payload: res.data });
   } catch (err) {
     //failure
+    const errors = err.response.data.errors;
+    //console.log("data is " + errors);
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+    }
+    dispatch({ type: REGISTER_FAIL });
   }
 };
 
@@ -33,9 +41,11 @@ export const loadUser = () => async (dispatch) => {
   } catch (err) {}
 };
 
-export const login = (formData) => async (dispatch) => {
+export const login = (email, password) => async (dispatch) => {
+  const body = JSON.stringify({ email, password });
   try {
-    const res = await api.post("/auth", formData);
+    const res = await api.post("/auth", body);
     dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+    dispatch(loadUser());
   } catch (err) {}
 };

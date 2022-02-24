@@ -3,6 +3,7 @@ import {
   REGISTER_SUCCESS,
   USER_LOADED,
   LOGIN_SUCCESS,
+  REGISTER_FAIL,
 } from "../../../redux/types/userTypes";
 const initialState = {
   user: null,
@@ -29,6 +30,8 @@ export default (state = initialState, action) => {
     //once the registration is done our registration API is going to return a token , if we get the token as a payload then authentication is true , we just received the newly created token
     //we use the loading flag to stop the loading of the image
     //This is a json object to store and update the store content as per the new payload.
+    case REGISTER_FAIL:
+      return { ...state, token: null, isAuthenticated: false, loading: false };
 
     default:
       return state;
